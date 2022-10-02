@@ -3,7 +3,7 @@ export const signUp = async(first_name,last_name,email,password)=>{
 
     try {
         
-      const Data = await fetch("/user/create",{
+      const Data = await fetch(`/user/create`,{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
@@ -37,4 +37,22 @@ export const logIn = async(email,password)=>{
       return error
   }
 
+}
+
+export const authUser = async(token)=>{
+  try {
+        
+    const Data = await fetch("/user/auth",{
+      method:"POST",
+      headers:{
+          "Content-Type":"application/json",
+          "auth-token":token
+      },
+    })
+    const response = await Data.json();
+    return response
+
+  } catch (error) {
+      return error
+  }
 }
